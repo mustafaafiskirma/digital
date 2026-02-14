@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TÜPRAŞ Mali İşler Digitalization Portal</title>
+  <meta name="description" content="Tüpraş Mali İşler Dijitalleşme ekibinin proje takip ve sunum portalı.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- ═══ PASSWORD OVERLAY ═══ -->
+  <div id="passwordOverlay" class="password-overlay">
+    <div class="password-card">
+      <h1 class="password-title">MID DIGITALIZATION</h1>
+      <h2>Hoş Geldiniz</h2>
+      <p>Lütfen devam etmek için şifreyi giriniz.</p>
+
+      <div class="password-input-wrapper">
+        <input type="password" id="passwordInput" placeholder="Şifre" autocomplete="off">
+        <button id="passwordSubmit">Giriş</button>
+      </div>
+      <p id="passwordError" class="password-error">Hatalı şifre, tekrar deneyin.</p>
+    </div>
+  </div>
+
+  <!-- ═══ NAVBAR ═══ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-brand"></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Ana Sayfa</a></li>
+      <li><a href="hakkimizda.html">Hakkımızda</a></li>
+      <li><a href="roadmap.html">Roadmap</a></li>
+      <li><a href="egitim.html">Eğitim</a></li>
+      <li><a href="#bulletins">Bültenler</a></li>
+    </ul>
+    <div class="nav-right">
+
+      <div class="theme-toggle" id="themeToggle" title="Tema Değiştir"></div>
+      <button class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="hero">
+    <div class="hero-floating-words" id="heroFloatingWords"></div>
+    <h1 class="hero-title">MID <span class="accent">Digitalization</span></h1>
+    <div class="hero-line"></div>
+  </section>
+
+  <!-- ═══ METRICS ═══ -->
+  <section class="section" id="metrics">
+    <div class="section-header">
+      <h2 class="section-title">Canlı Performans</h2>
+      <p class="section-subtitle">Dijitalleşme metriklerimiz – gerçek zamanlı</p>
+    </div>
+    <div class="metrics-grid" id="metricsGrid">
+      <!-- Rendered by JS -->
+    </div>
+  </section>
+
+  <!-- ═══ THREE PANELS ═══ -->
+  <section class="section" id="panels">
+    <!-- Tabs Navigation -->
+    <div class="panel-tabs">
+      <button class="panel-tab active" data-tab="agents">
+        Agentlar
+      </button>
+      <button class="panel-tab" data-tab="sap">
+        SAP Geliştirmeleri
+      </button>
+      <button class="panel-tab" data-tab="other">
+        Diğer Geliştirmeler
+      </button>
+    </div>
+
+    <div class="panels-container-tabs">
+      <!-- PANEL 1: Agents -->
+      <div class="panel-tab-content active" id="panel-agents">
+        <div class="panel-header">
+          <h2 class="panel-title">Agentlar</h2>
+        </div>
+        <div class="status-summary" id="agentStatus"></div>
+        <div class="card-grid" id="agentGrid"></div>
+      </div>
+
+      <!-- PANEL 2: SAP -->
+      <div class="panel-tab-content" id="panel-sap">
+        <div class="panel-header">
+          <h2 class="panel-title">SAP Geliştirmeleri</h2>
+        </div>
+        <div id="sapList" class="card-grid"></div>
+      </div>
+
+      <!-- PANEL 3: Other -->
+      <div class="panel-tab-content" id="panel-other">
+        <div class="panel-header">
+          <h2 class="panel-title">Diğer Geliştirmeler</h2>
+        </div>
+        <div class="filter-bar" id="otherFilters"></div>
+        <div class="card-grid" id="otherGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BULLETINS ═══ -->
+  <section class="bulletins-section" id="bulletins">
+    <div class="bulletin-header">
+      <h2>Bültenler</h2>
+      <p>Dijitalleşme ekibinin aylık yayınları</p>
+    </div>
+    <div class="bulletin-filters" id="bulletinFilters">
+      <!-- Rendered by JS -->
+    </div>
+    <div class="fan-container" id="fanContainer">
+      <button class="fan-nav prev" id="fanPrev">◀</button>
+      <!-- Fan cards rendered by JS -->
+      <button class="fan-nav next" id="fanNext">▶</button>
+    </div>
+    <div class="active-bulletin-detail" id="activeBulletinDetail">
+      <!-- Updated by JS when a card is focused -->
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <!-- Footer grid removed -->
+    <div class="footer-bottom">
+      © 2026 Tüpraş Mali İşler Digitalization
+    </div>
+  </footer>
+
+  <!-- ═══ MODAL ═══ -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modalContent">
+      <!-- Rendered dynamically by JS -->
+    </div>
+  </div>
+
+
+
+
+
+  <!-- ═══ CHAT WIDGET ═══ -->
+  <button class="chat-bubble" id="chatBubble" title="Asistan ile Sohbet">💬</button>
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div class="chat-header-avatar">🤖</div>
+        <div class="chat-header-text">
+          <h4>Digitalization Asistan</h4>
+          <span><span class="online-dot"></span> Çevrimiçi</span>
+        </div>
+      </div>
+      <button class="chat-close-btn" id="chatClose" title="Kapat">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <!-- WebChat will render here -->
+    </div>
+    <div class="chat-input-bar" id="chatInputBar">
+      <input type="text" id="chatInput" placeholder="Mesajınızı yazın..." autocomplete="off">
+      <button class="chat-send-btn" id="chatSend" title="Gönder">➤</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/metrics.js"></script>
+  <script src="js/agents.js"></script>
+  <script src="js/sap.js"></script>
+  <script src="js/other.js"></script>
+  <script src="js/bulletins.js"></script>
+  <script src="js/config.js"></script> <!-- Config must be loaded before chat -->
+  <script src="js/chat.js"></script>
+</body>
+
+</html>

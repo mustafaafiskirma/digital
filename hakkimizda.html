@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hakkımızda - TÜPRAŞ Mali İşler Digitalization</title>
+    <meta name="description" content="Tüpraş Mali İşler Dijitalleşme ekibi ve çalışmaları hakkında bilgi.">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Specific styles for About Us page */
+        .about-section {
+            padding: var(--space-3xl) var(--space-xl);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-2xl);
+        }
+
+        .member-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            text-align: center;
+            transition: all var(--transition-base);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--neon-blue);
+        }
+
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--bg-primary), var(--border-color));
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--text-secondary);
+            border: 4px solid var(--bg-card);
+            box-shadow: 0 0 0 2px var(--border-color);
+        }
+
+        .member-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .member-role {
+            font-size: 0.9rem;
+            color: var(--neon-blue);
+            font-weight: 600;
+            /* text-transform: uppercase; Removed */
+            letter-spacing: 1px;
+            margin-bottom: var(--space-md);
+        }
+
+        .member-bio {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .about-content {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            text-align: justify;
+        }
+
+        .about-content p {
+            margin-bottom: var(--space-md);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ═══ NAVBAR ═══ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand"></div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Ana Sayfa</a></li>
+            <li><a href="hakkimizda.html" class="active">Hakkımızda</a></li>
+            <li><a href="roadmap.html">Roadmap</a></li>
+            <li><a href="egitim.html">Eğitim</a></li>
+            <li><a href="index.html#bulletins">Bültenler</a></li>
+        </ul>
+        <div class="nav-right">
+            <div class="theme-toggle" id="themeToggle" title="Tema Değiştir"></div>
+            <button class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ═══ HEADER ═══ -->
+    <section class="section" style="padding-top: 120px; text-align: center;">
+        <div class="section-header">
+            <h1 class="section-title">Hakkımızda</h1>
+            <p class="section-subtitle">Mali İşler Dijitalleşme Ekibi</p>
+        </div>
+    </section>
+
+    <!-- ═══ CONTENT ═══ -->
+    <section class="about-section">
+        <div class="about-content">
+            <p>
+                Tüpraş Mali İşler Dijitalleşme Ekibi (MID), finansal süreçlerin modern teknolojilerle dönüşümünü
+                sağlamak amacıyla kurulmuştur.
+                Amacımız, veriye dayalı karar alma mekanizmalarını güçlendirmek, manuel iş yükünü azaltmak ve iş
+                birimlerimize katma değerli
+                analitik çözümler sunmaktır.
+            </p>
+            <p>
+                Yapay zeka, makine öğrenimi, süreç otomasyonu (RPA) ve ileri analitik araçlarını kullanarak; Mali İşler
+                departmanının
+                dijital olgunluk seviyesini en üst düzeye çıkarmayı hedefliyoruz. SAP S/4HANA geçiş süreçlerinden, özel
+                dashboard
+                tasarımlarına kadar geniş bir yelpazede projeler yürütmekteyiz.
+            </p>
+        </div>
+
+        <div class="team-grid">
+            <!-- Member 1 -->
+            <div class="member-card">
+                <div class="member-avatar">DC</div>
+                <h3 class="member-name">Deniz Cem</h3>
+                <span class="member-role">MANAGER</span>
+                <p class="member-bio">
+                    Mali İşler Dijitalleşme ekibinin liderliğini üstlenmektedir. Stratejik vizyonun belirlenmesi,
+                    proje portföyünün yönetimi ve dijital dönüşüm yol haritasının çizilmesinde öncülük eder.
+                </p>
+            </div>
+
+            <!-- Member 2 -->
+            <div class="member-card">
+                <div class="member-avatar">MF</div>
+                <h3 class="member-name">Mustafa Fışkırma</h3>
+                <span class="member-role">ASSISTANT SPECIALIST</span>
+                <p class="member-bio">
+                    Teknik uygulama, geliştirme ve operasyonel süreçlerin takibini yürütür.
+                    Yapay zeka asistanları, web geliştirmeleri ve veri analitiği projelerinde aktif rol alır.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="footer">
+        <!-- Footer grid removed -->
+        <div class="footer-bottom">
+            © 2026 Tüpraş Mali İşler Digitalization
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eğitim İçerikleri - TÜPRAŞ MID Portal</title>
+    <meta name="description" content="Tüpraş Mali İşler Dijitalleşme eğitim kaynakları ve rehberler.">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- ═══ NAVBAR ═══ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand"></div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Ana Sayfa</a></li>
+            <li><a href="hakkimizda.html">Hakkımızda</a></li>
+            <li><a href="roadmap.html">Roadmap</a></li>
+            <li><a href="egitim.html" class="active">Eğitim</a></li>
+            <li><a href="index.html#bulletins">Bültenler</a></li>
+        </ul>
+        <div class="nav-right">
+
+            <div class="theme-toggle" id="themeToggle" title="Tema Değiştir"></div>
+            <button class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ═══ PAGE HEADER ═══ -->
+    <div class="page-header">
+        <h1>Eğitim İçerikleri</h1>
+        <p>Öğren, uygula, ustalaş</p>
+    </div>
+
+    <!-- ═══ CONTENT ═══ -->
+    <section class="section">
+        <!-- Tabs -->
+        <div class="training-tabs" id="trainingTabs"></div>
+
+        <!-- Search -->
+        <div class="search-bar">
+            <span class="search-icon">⌕</span>
+            <input type="text" id="trainingSearch" placeholder="Eğitim ara...">
+        </div>
+
+        <!-- Content Grid -->
+        <div id="trainingContent"></div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="footer">
+        <!-- Footer grid removed -->
+        <div class="footer-bottom">
+            © 2026 Tüpraş Mali İşler Digitalization
+        </div>
+    </footer>
+
+    <!-- ═══ MODAL ═══ -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content" id="modalContent"></div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/training.js"></script>
+</body>
+
+</html>
