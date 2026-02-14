@@ -110,9 +110,13 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(el);
   });
 
-  // ── Hero Floating Keywords ──
+  // ── Hero Floating Keywords & Collision ──
   const floatContainer = document.getElementById('heroFloatingWords');
-  if (floatContainer) {
+  const heroSection = document.getElementById('hero');
+  const lineFill = document.getElementById('heroLineFill');
+  let currentFill = 0;
+
+  if (floatContainer && heroSection) {
     const keywords = [
       'AGENT', 'COPILOT', 'S/4HANA', 'DASHBOARD', 'VERİMLİLİK',
       'BÜLTEN', 'RPA', 'POWER BI', 'OTOMASYON', 'SAP', 'PYTHON',
@@ -123,23 +127,74 @@ document.addEventListener('DOMContentLoaded', () => {
       'DEEP LEARNING', 'TAHSİLAT', 'E-FATURA', 'REAL-TIME'
     ];
 
+    function spawnCollisionDrop(topPercent) {
+      const drop = document.createElement('div');
+      drop.className = 'collision-drop';
+      drop.style.setProperty('--drop-start', topPercent + '%');
+
+      // Blue only
+      const color = 'var(--neon-blue)';
+      drop.style.background = `linear-gradient(to bottom, ${color}, transparent)`;
+      drop.style.boxShadow = `0 0 10px ${color}, 0 0 20px ${color}`;
+
+      heroSection.appendChild(drop);
+
+      // Accumulate Line Fill
+      // Only contribute if below previous fill or random chance
+      if (lineFill) {
+        // Increase fill slightly
+        currentFill += 0.5;
+        if (currentFill > 100) currentFill = 0; // Reset loop or breathe
+        lineFill.style.height = currentFill + '%';
+      }
+
+      // Remove after animation
+      setTimeout(() => {
+        drop.remove();
+      }, 1500);
+    }
+
     function spawnWord(instant = false) {
       const word = document.createElement('span');
-      word.className = 'hero-floating-word';
       word.textContent = keywords[Math.floor(Math.random() * keywords.length)];
 
-      const size = 0.9 + Math.random() * 2.5; // 0.9rem - 3.4rem
-      const top = Math.random() * 95;          // 0% - 95% vertical
-      const duration = 15 + Math.random() * 20; // 15s - 35s flow
-      const opacity = 0.3 + Math.random() * 0.4; // 0.3 - 0.7 opacity (much more visible)
+      const side = Math.random() > 0.5 ? 'left' : 'right';
+      word.className = `hero-floating-word ${side}`;
+
+      const size = 0.8 + Math.random() * 2.0; // 0.8rem - 2.8rem
+      const top = Math.random() * 90;          // 0% - 90% vertical
+      // Duration needs to be consistent for collision calculation
+      // Let's vary it slightly but keep it trackable if we want precise collision 
+      // For now, simpler approach: CSS animation handles movement. 
+      // We just need to sync the drop.
+
+      // Faster animation for higher energy
+      const duration = 6 + Math.random() * 8; // 6s - 14s travel time
+      const opacity = 0.3 + Math.random() * 0.6;
 
       word.style.fontSize = size + 'rem';
       word.style.top = top + '%';
       word.style.animationDuration = duration + 's';
-      word.style.opacity = opacity;
+      word.style.setProperty('--word-opacity', opacity);
 
       if (instant) {
+        // Instant spawn (already in motion) - tricky to sync collision for these
         word.style.animationDelay = `-${Math.random() * duration}s`;
+      } else {
+        // New spawn - schedule collision drop
+        // Collision happens at 50% progress (since we move from side to center in CSS? 
+        // Actually CSS moves from 0 to Center. So collision is at end of animation? 
+        // Wait, current CSS moves from -10% to Center? 
+        // Let's re-read CSS intent: 
+        // right: -10% -> translateX(-50vw ...) 
+        // It moves TOWARDS center. The animation ends AT the center.
+        // So collision is at the END of the animation duration.
+
+        setTimeout(() => {
+          if (document.body.contains(word)) { // Check if word still exists/visible
+            spawnCollisionDrop(top);
+          }
+        }, duration * 1000 * 0.95); // Trigger slightly before end to look good
       }
 
       floatContainer.appendChild(word);
@@ -150,13 +205,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }, duration * 1000);
     }
 
-    // Spawn initial batch - Instant fill
-    for (let i = 0; i < 40; i++) {
+    // Spawn initial batch
+    for (let i = 0; i < 50; i++) {
       spawnWord(true);
     }
 
-    // Keep spawning - High density
-    setInterval(() => spawnWord(false), 400);
+    // High Density Spawning
+    setInterval(() => spawnWord(false), 150); // Every 150ms
   }
 
   // ── Panel Tabs Logic ──
