@@ -144,7 +144,29 @@ document.addEventListener('DOMContentLoaded', () => {
       if (lineFill) {
         // Increase fill slightly
         currentFill += 0.5;
-        if (currentFill > 100) currentFill = 0; // Reset loop or breathe
+
+        if (currentFill >= 100) {
+          // ── TRIGGER DISCHARGE COMBO ──
+          currentFill = 0;
+
+          const shockwave = document.getElementById('heroShockwave');
+          const title = document.querySelector('.hero-title');
+
+          if (shockwave) {
+            shockwave.classList.add('active');
+            setTimeout(() => shockwave.classList.remove('active'), 1000);
+          }
+
+          if (title) {
+            title.classList.add('flash');
+            setTimeout(() => title.classList.remove('flash'), 1000);
+          }
+
+          // Screen Shake
+          document.body.classList.add('shake-effect');
+          setTimeout(() => document.body.classList.remove('shake-effect'), 500);
+        }
+
         lineFill.style.height = currentFill + '%';
       }
 
