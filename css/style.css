@@ -229,6 +229,14 @@ button {
   animation: shake 0.5s ease-in-out;
 }
 
+.password-disclaimer {
+  color: rgba(255, 255, 255, 0.55) !important;
+  font-size: 0.78rem !important;
+  font-style: italic;
+  margin-top: var(--space-md) !important;
+  margin-bottom: 0 !important;
+}
+
 @keyframes shake {
 
   0%,
