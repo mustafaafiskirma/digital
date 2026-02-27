@@ -30,6 +30,11 @@ const ENV = {
 
   // ── Kimlik Doğrulama ──
   PASSWORD_HASH: '${PASSWORD_HASH}',
+  ADMIN_HASH: '${ADMIN_HASH}',
+
+  // ── GitHub API (Admin Yayınlama) ──
+  GITHUB_PAT: '${GH_PAT}',
+  GITHUB_REPO: 'mustafaafiskirma/digital',
 
   // ── Güvenlik Parametreleri ──
   MAX_LOGIN_ATTEMPTS: 5,

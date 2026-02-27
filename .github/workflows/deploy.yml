@@ -28,6 +28,8 @@ jobs:
         run: |
           sed -i "s|__HF_API_TOKEN__|${{ secrets.HF_API_TOKEN }}|g" js/env.js
           sed -i "s|__PASSWORD_HASH__|${{ secrets.PASSWORD_HASH }}|g" js/env.js
+          sed -i "s|__ADMIN_HASH__|${{ secrets.ADMIN_HASH }}|g" js/env.js
+          sed -i "s|__GH_PAT__|${{ secrets.GH_PAT }}|g" js/env.js
           echo "✅ Secrets injected into env.js"
 
       - name: Setup Pages

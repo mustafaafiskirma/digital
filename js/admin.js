@@ -9,7 +9,6 @@
     // ═══════════════════════════════════════
     // AUTH
     // ═══════════════════════════════════════
-    const PASSWORD_HASH = ENV.PASSWORD_HASH;
     let isAuth = false;
 
     async function sha256(msg) {
@@ -40,7 +39,7 @@
         }
         const pw = loginInput.value.replace(/[<>"'&]/g, '');
         const h = await sha256(pw);
-        if (h === PASSWORD_HASH) {
+        if (h === ENV.ADMIN_HASH || h === ENV.PASSWORD_HASH) {
             isAuth = true;
             failedAttempts = 0;
             sessionStorage.setItem('adminFailed', '0');
@@ -502,18 +501,70 @@
     }
 
     // ═══════════════════════════════════════
-    // PUBLISH / EXPORT
+    // PUBLISH via GitHub API
     // ═══════════════════════════════════════
-    document.getElementById('btnPublish').addEventListener('click', () => {
-        const content = DataStore.generateDataFile();
-        const blob = new Blob([content], { type: 'application/javascript' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'data.js';
-        a.click();
-        URL.revokeObjectURL(url);
-        showToast('data.js indirildi! Dosyayı js/ klasörüne koyup repo\'yu güncelleyin.');
+    document.getElementById('btnPublish').addEventListener('click', async () => {
+        const btn = document.getElementById('btnPublish');
+        const originalText = btn.textContent;
+        btn.textContent = '⏳ Yayımlanıyor...';
+        btn.disabled = true;
+
+        try {
+            const content = DataStore.generateDataFile();
+            const repo = ENV.GITHUB_REPO;
+            const path = 'js/data.js';
+            const token = ENV.GITHUB_PAT;
+
+            if (!token || token === '__GH_PAT__') {
+                // Fallback: dosya indirme (yerel geliştirme)
+                const blob = new Blob([content], { type: 'application/javascript' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'data.js';
+                a.click();
+                URL.revokeObjectURL(url);
+                showToast('⚠️ GitHub PAT eksik. data.js dosya olarak indirildi.');
+                btn.textContent = originalText;
+                btn.disabled = false;
+                return;
+            }
+
+            // 1. Mevcut dosyanın SHA'sını al
+            const getRes = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
+                headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+            });
+            const fileInfo = await getRes.json();
+            const sha = fileInfo.sha;
+
+            // 2. Dosyayı güncelle
+            const putRes = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `token ${token}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: `[Admin Panel] Veri güncellendi - ${new Date().toLocaleString('tr-TR')}`,
+                    content: btoa(unescape(encodeURIComponent(content))),
+                    sha: sha
+                })
+            });
+
+            if (putRes.ok) {
+                showToast('✅ Yayımlandı! Site 1-2 dk içinde güncellenecek.');
+            } else {
+                const err = await putRes.json();
+                throw new Error(err.message || 'GitHub API hatası');
+            }
+        } catch (e) {
+            console.error('[Admin] Yayımlama hatası:', e);
+            showToast('❌ Hata: ' + e.message);
+        } finally {
+            btn.textContent = originalText;
+            btn.disabled = false;
+        }
     });
 
     // ═══════════════════════════════════════

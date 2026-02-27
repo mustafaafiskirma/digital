@@ -15,7 +15,7 @@
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' 'unsafe-inline' https://api-inference.huggingface.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api-inference.huggingface.co; img-src 'self' data:; frame-ancestors 'none'; form-action 'self'; base-uri 'self';">
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' https://api-inference.huggingface.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api-inference.huggingface.co https://api.github.com; img-src 'self' data:; frame-ancestors 'none'; form-action 'self'; base-uri 'self';">
   <meta http-equiv="Cache-Control" content="no-store, no-cache, private, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
 
@@ -56,7 +56,7 @@
       <li><a href="#bulletins">Bültenler</a></li>
     </ul>
     <div class="nav-right">
-
+      <a href="admin.html" id="adminNavBtn" class="admin-nav-btn" style="display:none;" title="Admin Panel">⚙️ Admin</a>
       <div class="theme-toggle" id="themeToggle" title="Tema Değiştir"></div>
       <button class="hamburger" id="hamburger">
         <span></span><span></span><span></span>

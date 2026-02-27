@@ -94,12 +94,24 @@ document.addEventListener('DOMContentLoaded', () => {
         // SHA-256 ile parola hash karşılaştırması
         const hash = await sha256(sanitized);
 
-        if (hash === SECURITY_CONFIG.passwordHash) {
+        const isAdmin = hash === ENV.ADMIN_HASH;
+        const isRegular = hash === SECURITY_CONFIG.passwordHash;
+
+        if (isAdmin || isRegular) {
             // ✅ Başarılı giriş
             failedAttempts = 0;
             sessionStorage.setItem('failedAttempts', '0');
             sessionStorage.removeItem('lockoutUntil');
             isAuthenticated = true;
+
+            // Admin tespiti
+            if (isAdmin) {
+                sessionStorage.setItem('isAdmin', 'true');
+                const adminBtn = document.getElementById('adminNavBtn');
+                if (adminBtn) adminBtn.style.display = 'inline-block';
+            } else {
+                sessionStorage.removeItem('isAdmin');
+            }
 
             // Giriş başarılı animasyon
             overlay.style.opacity = '0';

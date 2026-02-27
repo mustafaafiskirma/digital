@@ -11,6 +11,11 @@ const ENV = {
 
   // ── Kimlik Doğrulama ──
   PASSWORD_HASH: '__PASSWORD_HASH__',
+  ADMIN_HASH: '__ADMIN_HASH__',
+
+  // ── GitHub API (Admin Yayınlama) ──
+  GITHUB_PAT: '__GH_PAT__',
+  GITHUB_REPO: 'mustafaafiskirma/digital',
 
   // ── Güvenlik Parametreleri ──
   MAX_LOGIN_ATTEMPTS: 5,
@@ -20,4 +25,3 @@ const ENV = {
   PROGRESSIVE_DELAYS: [0, 0, 5000, 15000, 30000],
   MAX_INPUT_LENGTH: 64
 };
-

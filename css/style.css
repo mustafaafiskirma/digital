@@ -508,6 +508,25 @@ button {
   transition-delay: 0.5s;
 }
 
+/* Admin Button */
+.admin-nav-btn {
+  padding: 6px 14px;
+  background: rgba(0, 180, 216, 0.15);
+  color: var(--neon-blue);
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  border: 1px solid rgba(0, 180, 216, 0.3);
+}
+
+.admin-nav-btn:hover {
+  background: rgba(0, 180, 216, 0.25);
+  border-color: var(--neon-blue);
+  transform: translateY(-1px);
+}
+
 .nav-right {
   display: flex;
   align-items: center;
