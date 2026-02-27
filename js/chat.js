@@ -71,6 +71,12 @@ Bilmediğin konularda dürüst ol ve MID ekibine yönlendir.`;
         const text = input.value.trim();
         if (!text || isProcessing) return;
 
+        // Input uzunluk sınırlaması (XSS & abuse koruması)
+        if (text.length > 500) {
+            appendMessage('⚠️ Mesaj çok uzun. Maksimum 500 karakter gönderebilirsiniz.', 'system');
+            return;
+        }
+
         // Check API token
         if (!apiToken || apiToken === 'hf_XXXXXXXXXXXXXXXXXXXXXXXXXXXXX') {
             appendMessage('⚠️ Lütfen js/config.js dosyasını kontrol edin ve geçerli bir HF_API_TOKEN ekleyin.', 'system');

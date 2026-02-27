@@ -2,40 +2,7 @@
    TRAINING.JS - Training Corner Logic
    ============================================ */
 
-const trainingData = {
-  videos: [
-    { title: 'Nomex Fatura Süreci', desc: 'Nomex fatura sürecinin detaylı anlatımı.', duration: '', icon: '', videoFile: 'assets/videos/Nomex_Fatura_Sureci.mp4' },
-    { title: 'Agent Kullanım Rehberi', desc: 'Agentları nasıl kullanacağınızı adım adım öğrenin.', duration: '5:32', icon: '', videoFile: '' },
-    { title: 'SAP Rapor Oluşturma', desc: 'SAP üzerinde özel rapor oluşturma eğitimi.', duration: '8:15', icon: '', videoFile: '' },
-    { title: 'Power BI Temelleri', desc: 'Power BI ile dashboard oluşturma temelleri.', duration: '12:45', icon: '', videoFile: '' },
-    { title: 'RPA Bot Geliştirme', desc: 'UiPath ile basit bir RPA botu geliştirin.', duration: '15:20', icon: '', videoFile: '' },
-    { title: 'Python ile Veri Analizi', desc: 'Pandas kütüphanesi ile veri analizi.', duration: '18:30', icon: '', videoFile: '' },
-    { title: 'Portal Kullanım Eğitimi', desc: 'Bu portal nasıl kullanılır?', duration: '3:45', icon: '', videoFile: '' }
-  ],
-  docs: [
-    { title: 'Fatura Agent Kılavuzu', desc: 'Fatura Agent kullanım kılavuzu.', format: 'PDF', icon: '' },
-    { title: 'RPA Bot Kullanım Dökümanı', desc: 'RPA botlarının teknik dökümanı.', format: 'PDF', icon: '' },
-    { title: 'Genel Portal Rehberi', desc: 'Portal kullanım rehberi.', format: 'PDF', icon: '' },
-    { title: 'SAP FI Modül Rehberi', desc: 'SAP Finansal muhasebe modül rehberi.', format: 'PDF', icon: '' },
-    { title: 'Veri Güvenliği Politikası', desc: 'Dijital veri güvenliği kuralları.', format: 'PDF', icon: '' },
-    { title: 'API Entegrasyon Rehberi', desc: 'Dış sistemlerle entegrasyon rehberi.', format: 'PDF', icon: '' }
-  ],
-  quickstart: [
-    { title: 'Hızlı Başlangıç: Agent', desc: '5 dakikada ilk agentınızı çalıştırın.', time: '5 dk', icon: '' },
-    { title: 'Hızlı Başlangıç: RPA', desc: 'İlk RPA botunuzu 10 dakikada kurun.', time: '10 dk', icon: '' },
-    { title: 'Hızlı Başlangıç: Power BI', desc: 'İlk dashboardunuzu oluşturun.', time: '15 dk', icon: '' },
-    { title: 'Hızlı Başlangıç: Portal', desc: 'Portalı etkili kullanmanın yolları.', time: '3 dk', icon: '' }
-  ],
-  faq: [
-    { q: 'Agent nedir ve nasıl çalışır?', a: 'Agent, belirli bir iş sürecini otomatik olarak yürüten yapay zeka destekli yazılım bileşenidir. Tanımlanan kurallara göre verileri işler, kararlar verir ve işlemleri gerçekleştirir.' },
-    { q: 'Nasıl yeni bir proje talebi oluşturabilirim?', a: 'Footer bölümündeki "Talep Formu" linkine tıklayarak veya Teams kanalı üzerinden ekibimizle iletişime geçebilirsiniz.' },
-    { q: 'Dark mode ayarı nerede?', a: 'Sağ üst köşedeki güneş/ay ikonuna tıklayarak dark ve light mod arasında geçiş yapabilirsiniz. Tercihiniz otomatik olarak kaydedilir.' },
-    { q: 'Sunum modunu nasıl kullanırım?', a: 'Üst menüdeki "Sunum" butonuna tıklayın. Tam ekran görünüme geçecektir. Ok tuşları ile bölümler arasında gezinebilir, ESC tuşu ile çıkabilirsiniz.' },
-    { q: 'Verileri nasıl dışa aktarabilirim?', a: 'Her sayfa ve kartta export seçenekleri bulunmaktadır. PPT, PDF, PNG ve Excel formatlarında dışa aktarım yapabilirsiniz.' },
-    { q: 'Bülten aboneliği nasıl yapılır?', a: 'Ana sayfadaki Bültenler bölümünde "Abone Ol" butonuna tıklayarak aylık bültenlerimize abone olabilirsiniz.' },
-    { q: 'Bir hata bulursam kime bildirmeliyim?', a: 'Teams kanalımız üzerinden veya Mustafa.Fiskirma@tupras.com.tr adresine mail göndererek hataları bildirebilirsiniz.' }
-  ]
-};
+const trainingData = DataStore.getData('training');
 
 const tabNames = [
   { key: 'videos', label: 'Video Eğitimler' },

@@ -2,72 +2,7 @@
    METRICS.JS - Count-up Animation Dashboard
    ============================================ */
 
-const metricsData = [
-    {
-        value: 23,
-        prefix: '%',
-        suffix: '',
-        label: 'VERİMLİLİK ARTIŞI',
-        change: '5%',
-        changeLabel: 'geçen çeyreğe göre',
-        positive: true,
-        icon: '📈',
-        description: 'Dijitalleşme projeleri sayesinde iş süreçlerindeki verimlilik artışı. Özellikle RPA ve otomasyon projeleri bu artışta büyük rol oynamıştır.',
-        details: [
-            'Otomasyon ile manuel iş yükünde %15 azalma',
-            'Süreç iyileştirmeleri ile %8 hız artışı',
-            'Hata oranlarında %90 düşüş'
-        ]
-    },
-    {
-        value: 1240,
-        prefix: '',
-        suffix: ' saat',
-        label: 'KAZANILAN ZAMAN',
-        change: '8%',
-        changeLabel: 'geçen çeyreğe göre',
-        positive: true,
-        icon: '⏱️',
-        description: 'Yıl başından bu yana tamamlanan projelerle toplam kazanılan adam/saat miktarı. Bu süreler katma değerli işlere yönlendirilmiştir.',
-        details: [
-            'RPA Robotları: 850 saat',
-            'Süreç Optimizasyonu: 210 saat',
-            'Self-Servis Raporlama: 180 saat'
-        ]
-    },
-    {
-        value: 2.1,
-        prefix: '₺',
-        suffix: ' Mn',
-        label: 'YILLIK TASARRUF',
-        change: '12%',
-        changeLabel: 'geçen çeyreğe göre',
-        positive: true,
-        icon: '💸',
-        description: 'Dijitalleşme inisiyatifleri sonucu elde edilen doğrudan ve dolaylı maliyet tasarrufları.',
-        details: [
-            'Kağıt/Baskı Tasarrufu: 0.4 Mn ₺',
-            'Lisans Optimizasyonu: 1.2 Mn ₺',
-            'Operasyonel Verimlilik: 0.5 Mn ₺'
-        ]
-    },
-    {
-        value: 47,
-        prefix: '',
-        suffix: '',
-        label: 'TAMAMLANAN PROJE',
-        change: '3 Proje',
-        changeLabel: 'geçen çeyreğe göre',
-        positive: true,
-        icon: '✅',
-        description: '2025 yılı içerisinde başarıyla canlıya alınan dijitalleşme projelerinin toplam sayısı.',
-        details: [
-            'Finansal Raporlama Otomasyonu',
-            'Tedarikçi Portalı Yenilemesi',
-            'Mobil Onay Mekanizması'
-        ]
-    }
-];
+const metricsData = DataStore.getData('metrics');
 
 function renderMetrics() {
     const grid = document.getElementById('metricsGrid');

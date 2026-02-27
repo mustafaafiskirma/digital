@@ -2,63 +2,7 @@
    SAP.JS - SAP Development Cards
    ============================================ */
 
-const sapData = [
-  {
-    title: 'SAP FI Güncelleme',
-    module: 'FI/CO',
-    steps: ['Analiz', 'Geliştirme', 'Test', 'Canlı'],
-    currentStep: 2, // 0-indexed, 2 = Test
-    completedSteps: [0, 1],
-    target: '15 Mart 2026',
-    description: 'Finansal muhasebe modülünde yeni raporlama altyapısı ve hesap planı güncellemesi.',
-    owner: 'Deniz Cem',
-    affected: ['FI', 'CO', 'MM']
-  },
-  {
-    title: 'SAP MM Entegrasyonu',
-    module: 'MM/SD',
-    steps: ['Analiz', 'Geliştirme', 'Test', 'Canlı'],
-    currentStep: 1,
-    completedSteps: [0],
-    target: '30 Nisan 2026',
-    description: 'Malzeme yönetimi ve satış dağıtım modüllerinin entegrasyonu.',
-    owner: 'Deniz Cem',
-    affected: ['MM', 'SD', 'FI']
-  },
-  {
-    title: 'SAP HR Portalı',
-    module: 'HR',
-    steps: ['Analiz', 'Geliştirme', 'Test', 'Canlı'],
-    currentStep: 3,
-    completedSteps: [0, 1, 2],
-    target: '01 Mart 2026',
-    description: 'İnsan kaynakları self-servis portal geliştirmesi.',
-    owner: 'Deniz Cem',
-    affected: ['HR', 'FI']
-  },
-  {
-    title: 'SAP BW Raporlama',
-    module: 'BW/BI',
-    steps: ['Analiz', 'Geliştirme', 'Test', 'Canlı'],
-    currentStep: 0,
-    completedSteps: [],
-    target: '15 Haziran 2026',
-    description: 'Business Warehouse raporlama altyapısının modernizasyonu.',
-    owner: 'Deniz Cem',
-    affected: ['BW', 'FI', 'CO', 'MM']
-  },
-  {
-    title: 'SAP PP Optimizasyonu',
-    module: 'PP',
-    steps: ['Analiz', 'Geliştirme', 'Test', 'Canlı'],
-    currentStep: 2,
-    completedSteps: [0, 1],
-    target: '20 Mart 2026',
-    description: 'Üretim planlama modülünde performans optimizasyonu.',
-    owner: 'Deniz Cem',
-    affected: ['PP', 'MM', 'QM']
-  }
-];
+const sapData = DataStore.getData('sap');
 
 function renderSAP() {
   const list = document.getElementById('sapList');

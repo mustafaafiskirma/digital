@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - MID Portal</title>
+
+    <!-- ═══ GÜVENLİK META ETİKETLERİ ═══ -->
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, private, must-revalidate">
+
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+    <!-- ═══ LOGIN OVERLAY ═══ -->
+    <div id="loginOverlay" class="login-overlay">
+        <div class="login-card">
+            <div class="login-icon">🔐</div>
+            <h1>Admin Panel</h1>
+            <p>Yönetim paneline erişmek için şifreyi girin.</p>
+            <input type="text" id="honeypotAdmin" name="website" autocomplete="off" tabindex="-1"
+                style="position:absolute;left:-9999px;top:-9999px;opacity:0;height:0;width:0;">
+            <div class="login-form">
+                <input type="password" id="adminPassword" placeholder="Şifre" autocomplete="off" maxlength="64">
+                <button id="adminLoginBtn">Giriş</button>
+            </div>
+            <p id="loginError" class="login-error"></p>
+        </div>
+    </div>
+
+    <!-- ═══ ADMIN LAYOUT ═══ -->
+    <div id="adminApp" class="admin-app" style="display:none;">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>⚙️ Admin</h2>
+                <span class="sidebar-subtitle">MID Portal</span>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-section="metrics">📊 Metrikler</button>
+                <button class="nav-item" data-section="agents">🤖 Agentlar</button>
+                <button class="nav-item" data-section="sap">💎 SAP Geliştirmeleri</button>
+                <button class="nav-item" data-section="other">🔧 Diğer Geliştirmeler</button>
+                <button class="nav-item" data-section="bulletins">📰 Bültenler</button>
+                <button class="nav-item" data-section="roadmap">🗺️ Roadmap</button>
+                <button class="nav-item" data-section="training">📚 Eğitim İçerikleri</button>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="btn-export" id="btnPublish">📥 Yayınla (data.js indir)</button>
+                <button class="btn-reset" id="btnResetAll">🔄 Tümünü Sıfırla</button>
+                <a href="index.html" class="btn-back">← Siteye Dön</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1 id="sectionTitle">Metrikler</h1>
+                <div class="header-actions">
+                    <button class="btn btn-primary" id="btnAdd">+ Yeni Ekle</button>
+                    <button class="btn btn-secondary" id="btnResetSection">Varsayılana Dön</button>
+                </div>
+            </header>
+            <div id="contentArea" class="content-area">
+                <!-- Rendered by JS -->
+            </div>
+        </main>
+    </div>
+
+    <!-- ═══ EDIT MODAL ═══ -->
+    <div id="editModal" class="modal-overlay">
+        <div class="modal-panel">
+            <div class="modal-header">
+                <h2 id="modalTitle">Düzenle</h2>
+                <button class="modal-close" id="modalClose">✕</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Form rendered by JS -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="modalSave">Kaydet</button>
+                <button class="btn btn-secondary" id="modalCancel">İptal</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/env.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>

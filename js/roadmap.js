@@ -2,27 +2,7 @@
    ROADMAP.JS - Timeline / Kanban / List Views
    ============================================ */
 
-const roadmapData = [
-  // Agents (Synced with Homepage)
-  { name: 'Tüpraş Mali İşler Asistanı', category: 'Agent', quarter: '2026 Q1', status: 'completed' },
-  { name: 'Budget Asist', category: 'Agent', quarter: '2026 Q2', status: 'in-progress' },
-  { name: 'Kurumsal Hafıza', category: 'Agent', quarter: '2026 Q4', status: 'planned' },
-  { name: 'Dijital Muhabir', category: 'Agent', quarter: '2026 Q1', status: 'in-progress' }, // Suspended/Dev
-
-  // Other Existing Items
-  { name: 'Fatura RPA Botu', category: 'RPA', quarter: '2026 Q1', status: 'in-progress' },
-  { name: 'SAP FI Güncelleme', category: 'SAP', quarter: '2026 Q1', status: 'in-progress' },
-  { name: 'SAP HR Portalı', category: 'SAP', quarter: '2026 Q1', status: 'in-progress' },
-  { name: 'Portal Lansmanı', category: 'Diğer', quarter: '2026 Q1', status: 'in-progress' },
-
-  // Past / Future
-  { name: 'Finansal Dashboard', category: 'Power BI', quarter: '2025 Q4', status: 'completed' },
-  { name: 'Masraf RPA Botu', category: 'RPA', quarter: '2025 Q4', status: 'completed' },
-  { name: 'SAP MM Enteg.', category: 'SAP', quarter: '2026 Q2', status: 'planned' },
-  { name: 'Stok Analizi', category: 'Power BI', quarter: '2026 Q2', status: 'planned' },
-  { name: 'SAP BW Raporlama', category: 'SAP', quarter: '2026 Q3', status: 'planned' },
-  { name: 'AI Portal v2.0', category: 'Diğer', quarter: '2026 Q3', status: 'planned' }
-];
+const roadmapData = DataStore.getData('roadmap');
 
 const roadmapCategories = ['Tümü', 'Agent', 'SAP', 'RPA', 'Power BI', 'Diğer'];
 let activeRoadmapFilter = 'Tümü';
