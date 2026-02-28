@@ -1,6 +1,6 @@
 /* ============================================
    DATA.JS - Merkezi Veri Yönetimi
-   Otomatik oluşturuldu: 28.02.2026 17:04:56
+   Otomatik oluşturuldu: 28.02.2026 18:15:27
    ============================================ */
 
 const DataStore = (function () {
@@ -635,6 +635,18 @@ const DataStore = (function () {
       "icon": "",
       "mostRead": false,
       "summary": "Sağlıklı ve keyifli kahvaltı önerileri."
+    },
+    {
+      "title": "UiPath ",
+      "month": "Şubat",
+      "year": 2026,
+      "topic": "Uipath ile kapalı devre agent",
+      "summary": "Uipath ile kapalı devre agent",
+      "coverImage": "",
+      "pdfFile": "",
+      "mostRead": false,
+      "id": 8,
+      "icon": ""
     }
   ],
   "roadmap": [
