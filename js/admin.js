@@ -139,8 +139,8 @@
                 { key: 'year', label: 'Yıl', type: 'number' },
                 { key: 'topic', label: 'Konu', type: 'text' },
                 { key: 'summary', label: 'Özet', type: 'textarea' },
-                { key: 'coverImage', label: 'Kapak Resmi Yolu', type: 'text' },
-                { key: 'pdfFile', label: 'PDF Dosya Yolu', type: 'text' },
+                { key: 'coverImage', label: 'Kapak Resmi', type: 'file', accept: 'image/*', uploadDir: 'assets/bulletins/' },
+                { key: 'pdfFile', label: 'PDF Dosyası', type: 'file', accept: '.pdf', uploadDir: 'assets/bulletins/' },
                 { key: 'mostRead', label: 'En Çok Okunan?', type: 'select', options: [{ v: true, l: 'Evet' }, { v: false, l: 'Hayır' }] },
             ],
             nameKey: 'title'
@@ -169,7 +169,7 @@
                         { key: 'title', label: 'Başlık', type: 'text' },
                         { key: 'desc', label: 'Açıklama', type: 'textarea' },
                         { key: 'duration', label: 'Süre', type: 'text' },
-                        { key: 'videoFile', label: 'Video Dosya Yolu', type: 'text' },
+                        { key: 'videoFile', label: 'Video Dosyası', type: 'file', accept: 'video/*', uploadDir: 'assets/videos/' },
                     ]
                 },
                 docs: {
@@ -391,16 +391,139 @@
                     html += `<option value="${o.v}" ${sel}>${o.l}</option>`;
                 });
                 html += `</select>`;
+            } else if (f.type === 'file') {
+                html += `<div class="file-upload-area" id="upload_area_${f.key}">`;
+                html += `<input type="hidden" id="field_${f.key}" value="${sanitize(String(val))}">`;
+                html += `<div class="file-upload-row">`;
+                html += `<input type="file" id="file_${f.key}" accept="${f.accept || '*'}" class="file-input">`;
+                html += `<button type="button" class="btn btn-primary btn-upload" data-key="${f.key}" data-dir="${f.uploadDir}">📤 Yükle</button>`;
+                html += `</div>`;
+                if (val) {
+                    html += `<div class="file-current">📎 Mevcut: <span>${sanitize(String(val))}</span></div>`;
+                }
+                html += `<div class="file-status" id="status_${f.key}"></div>`;
+                html += `</div>`;
             } else {
                 html += `<input type="${f.type}" id="field_${f.key}" value="${sanitize(String(val))}" ${f.step ? `step="${f.step}"` : ''}>`;
             }
             html += `</div>`;
         });
         modalBody.innerHTML = html;
+
+        // Bind upload buttons
+        modalBody.querySelectorAll('.btn-upload').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const key = btn.dataset.key;
+                const dir = btn.dataset.dir;
+                const fileInput = document.getElementById('file_' + key);
+                const hiddenInput = document.getElementById('field_' + key);
+                const statusEl = document.getElementById('status_' + key);
+
+                if (!fileInput.files || fileInput.files.length === 0) {
+                    statusEl.innerHTML = '<span style="color:#ff6b6b;">⚠️ Lütfen önce bir dosya seçin.</span>';
+                    return;
+                }
+
+                const file = fileInput.files[0];
+                const maxSize = 100 * 1024 * 1024; // 100MB
+                if (file.size > maxSize) {
+                    statusEl.innerHTML = '<span style="color:#ff6b6b;">❌ Dosya 100MB limitini aşıyor.</span>';
+                    return;
+                }
+
+                btn.disabled = true;
+                btn.textContent = '⏳ Yükleniyor...';
+                statusEl.innerHTML = '<span style="color:#48CAE4;">⏳ Dosya yükleniyor...</span>';
+
+                try {
+                    const filePath = await uploadFileToGitHub(file, dir);
+                    hiddenInput.value = filePath;
+                    statusEl.innerHTML = `<span style="color:#22c55e;">✅ Yüklendi: ${filePath}</span>`;
+                    const currentEl = btn.closest('.file-upload-area').querySelector('.file-current');
+                    if (currentEl) {
+                        currentEl.innerHTML = `📎 Mevcut: <span>${filePath}</span>`;
+                    } else {
+                        const newCurrent = document.createElement('div');
+                        newCurrent.className = 'file-current';
+                        newCurrent.innerHTML = `📎 Mevcut: <span>${filePath}</span>`;
+                        btn.closest('.file-upload-row').after(newCurrent);
+                    }
+                } catch (e) {
+                    console.error('[Upload]', e);
+                    statusEl.innerHTML = `<span style="color:#ff6b6b;">❌ Hata: ${e.message}</span>`;
+                } finally {
+                    btn.disabled = false;
+                    btn.textContent = '📤 Yükle';
+                }
+            });
+        });
     }
 
     function sanitize(str) {
         return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    // ═══════════════════════════════════════
+    // FILE UPLOAD via GitHub API
+    // ═══════════════════════════════════════
+    async function uploadFileToGitHub(file, uploadDir) {
+        const token = ENV.GITHUB_PAT;
+        const repo = ENV.GITHUB_REPO;
+
+        if (!token || token === '__GH_PAT__') {
+            throw new Error('GitHub PAT yapılandırılmamış. Dosya yüklemesi deploy sonrası çalışır.');
+        }
+
+        // Dosya adını temizle (Türkçe karakter, boşluk)
+        const cleanName = file.name
+            .replace(/\s+/g, '-')
+            .replace(/[^a-zA-Z0-9._-]/g, '')
+            .toLowerCase();
+        const filePath = uploadDir + cleanName;
+
+        // Dosyayı base64 olarak oku
+        const base64Content = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result.split(',')[1]);
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+
+        // Mevcut dosya var mı kontrol et (SHA lazım güncelleme için)
+        let sha = null;
+        try {
+            const getRes = await fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`, {
+                headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+            });
+            if (getRes.ok) {
+                const info = await getRes.json();
+                sha = info.sha;
+            }
+        } catch (e) { /* dosya yok, yeni oluşturulacak */ }
+
+        // Dosyayı yükle/güncelle
+        const body = {
+            message: `[Admin] Dosya yüklendi: ${cleanName}`,
+            content: base64Content
+        };
+        if (sha) body.sha = sha;
+
+        const putRes = await fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `token ${token}`,
+                'Accept': 'application/vnd.github.v3+json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        });
+
+        if (!putRes.ok) {
+            const err = await putRes.json();
+            throw new Error(err.message || 'Yükleme başarısız');
+        }
+
+        return filePath;
     }
 
     modalSave.addEventListener('click', saveItem);

@@ -526,6 +526,64 @@ body {
     gap: 12px;
 }
 
+/* ═══ FILE UPLOAD ═══ */
+.file-upload-area {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px dashed var(--admin-border);
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.file-upload-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.file-input {
+    flex: 1;
+    padding: 8px !important;
+    font-size: 0.85rem !important;
+    background: rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid var(--admin-border) !important;
+    border-radius: 6px !important;
+    color: var(--admin-text) !important;
+}
+
+.file-input::file-selector-button {
+    padding: 4px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--admin-border);
+    border-radius: 4px;
+    color: var(--admin-text);
+    font-size: 0.8rem;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+.btn-upload {
+    white-space: nowrap;
+    padding: 8px 16px !important;
+    font-size: 0.85rem !important;
+}
+
+.file-current {
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: var(--admin-text-dim);
+}
+
+.file-current span {
+    color: var(--admin-accent);
+    word-break: break-all;
+}
+
+.file-status {
+    margin-top: 6px;
+    font-size: 0.8rem;
+    min-height: 18px;
+}
+
 /* ═══ TOAST ═══ */
 .toast {
     position: fixed;
