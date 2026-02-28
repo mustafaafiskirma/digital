@@ -258,8 +258,8 @@
             html += `<td>${i + 1}</td>`;
             columns.forEach(col => {
                 let val = item[col];
-                if (val === true) val = '✅';
-                else if (val === false) val = '❌';
+                if (val === true) val = 'Evet';
+                else if (val === false) val = 'Hayır';
                 else if (val == null) val = '-';
                 // Status badge
                 if (col === 'status' || col === 'statusLabel') {
@@ -270,8 +270,8 @@
                 }
             });
             html += `<td><div class="action-btns">`;
-            html += `<button class="btn-edit" data-idx="${i}" data-section="${section}" ${subKey ? `data-sub="${subKey}"` : ''}>✏️ Düzenle</button>`;
-            html += `<button class="btn-delete" data-idx="${i}" data-section="${section}" ${subKey ? `data-sub="${subKey}"` : ''}>🗑️ Sil</button>`;
+            html += `<button class="btn-edit" data-idx="${i}" data-section="${section}" ${subKey ? `data-sub="${subKey}"` : ''}>Düzenle</button>`;
+            html += `<button class="btn-delete" data-idx="${i}" data-section="${section}" ${subKey ? `data-sub="${subKey}"` : ''}>Sil</button>`;
             html += `</div></td></tr>`;
         });
 
@@ -396,10 +396,10 @@
                 html += `<input type="hidden" id="field_${f.key}" value="${sanitize(String(val))}">`;
                 html += `<div class="file-upload-row">`;
                 html += `<input type="file" id="file_${f.key}" accept="${f.accept || '*'}" class="file-input">`;
-                html += `<button type="button" class="btn btn-primary btn-upload" data-key="${f.key}" data-dir="${f.uploadDir}">📤 Yükle</button>`;
+                html += `<button type="button" class="btn btn-primary btn-upload" data-key="${f.key}" data-dir="${f.uploadDir}">Yükle</button>`;
                 html += `</div>`;
                 if (val) {
-                    html += `<div class="file-current">📎 Mevcut: <span>${sanitize(String(val))}</span></div>`;
+                    html += `<div class="file-current">Mevcut: <span>${sanitize(String(val))}</span></div>`;
                 }
                 html += `<div class="file-status" id="status_${f.key}"></div>`;
                 html += `</div>`;
@@ -420,40 +420,40 @@
                 const statusEl = document.getElementById('status_' + key);
 
                 if (!fileInput.files || fileInput.files.length === 0) {
-                    statusEl.innerHTML = '<span style="color:#ff6b6b;">⚠️ Lütfen önce bir dosya seçin.</span>';
+                    statusEl.innerHTML = '<span style="color:#ff6b6b;">Lütfen önce bir dosya seçin.</span>';
                     return;
                 }
 
                 const file = fileInput.files[0];
                 const maxSize = 100 * 1024 * 1024; // 100MB
                 if (file.size > maxSize) {
-                    statusEl.innerHTML = '<span style="color:#ff6b6b;">❌ Dosya 100MB limitini aşıyor.</span>';
+                    statusEl.innerHTML = '<span style="color:#ff6b6b;">Dosya 100MB limitini aşıyor.</span>';
                     return;
                 }
 
                 btn.disabled = true;
-                btn.textContent = '⏳ Yükleniyor...';
-                statusEl.innerHTML = '<span style="color:#48CAE4;">⏳ Dosya yükleniyor...</span>';
+                btn.textContent = 'Yükleniyor...';
+                statusEl.innerHTML = '<span style="color:#48CAE4;">Dosya yükleniyor...</span>';
 
                 try {
                     const filePath = await uploadFileToGitHub(file, dir);
                     hiddenInput.value = filePath;
-                    statusEl.innerHTML = `<span style="color:#22c55e;">✅ Yüklendi: ${filePath}</span>`;
+                    statusEl.innerHTML = `<span style="color:#22c55e;">Yüklendi: ${filePath}</span>`;
                     const currentEl = btn.closest('.file-upload-area').querySelector('.file-current');
                     if (currentEl) {
-                        currentEl.innerHTML = `📎 Mevcut: <span>${filePath}</span>`;
+                        currentEl.innerHTML = `Mevcut: <span>${filePath}</span>`;
                     } else {
                         const newCurrent = document.createElement('div');
                         newCurrent.className = 'file-current';
-                        newCurrent.innerHTML = `📎 Mevcut: <span>${filePath}</span>`;
+                        newCurrent.innerHTML = `Mevcut: <span>${filePath}</span>`;
                         btn.closest('.file-upload-row').after(newCurrent);
                     }
                 } catch (e) {
                     console.error('[Upload]', e);
-                    statusEl.innerHTML = `<span style="color:#ff6b6b;">❌ Hata: ${e.message}</span>`;
+                    statusEl.innerHTML = `<span style="color:#ff6b6b;">Hata: ${e.message}</span>`;
                 } finally {
                     btn.disabled = false;
-                    btn.textContent = '📤 Yükle';
+                    btn.textContent = 'Yükle';
                 }
             });
         });
@@ -629,7 +629,7 @@
     document.getElementById('btnPublish').addEventListener('click', async () => {
         const btn = document.getElementById('btnPublish');
         const originalText = btn.textContent;
-        btn.textContent = '⏳ Yayımlanıyor...';
+        btn.textContent = 'Yayımlanıyor...';
         btn.disabled = true;
 
         try {
@@ -647,7 +647,7 @@
                 a.download = 'data.js';
                 a.click();
                 URL.revokeObjectURL(url);
-                showToast('⚠️ GitHub PAT eksik. data.js dosya olarak indirildi.');
+                showToast('GitHub PAT eksik. data.js dosya olarak indirildi.');
                 btn.textContent = originalText;
                 btn.disabled = false;
                 return;
@@ -676,14 +676,14 @@
             });
 
             if (putRes.ok) {
-                showToast('✅ Yayımlandı! Site 1-2 dk içinde güncellenecek.');
+                showToast('Yayımlandı! Site 1-2 dk içinde güncellenecek.');
             } else {
                 const err = await putRes.json();
                 throw new Error(err.message || 'GitHub API hatası');
             }
         } catch (e) {
             console.error('[Admin] Yayımlama hatası:', e);
-            showToast('❌ Hata: ' + e.message);
+            showToast('Hata: ' + e.message);
         } finally {
             btn.textContent = originalText;
             btn.disabled = false;

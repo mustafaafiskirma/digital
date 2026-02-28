@@ -21,7 +21,13 @@
     <!-- ═══ LOGIN OVERLAY ═══ -->
     <div id="loginOverlay" class="login-overlay">
         <div class="login-card">
-            <div class="login-icon">🔐</div>
+            <div class="login-icon" style="font-size:2.5rem;color:var(--admin-accent);">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>
+            </div>
             <h1>Admin Panel</h1>
             <p>Yönetim paneline erişmek için şifreyi girin.</p>
             <input type="text" id="honeypotAdmin" name="website" autocomplete="off" tabindex="-1"
@@ -39,21 +45,21 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-header">
-                <h2>⚙️ Admin</h2>
+                <h2>Admin</h2>
                 <span class="sidebar-subtitle">MID Portal</span>
             </div>
             <nav class="sidebar-nav">
-                <button class="nav-item active" data-section="metrics">📊 Metrikler</button>
-                <button class="nav-item" data-section="agents">🤖 Agentlar</button>
-                <button class="nav-item" data-section="sap">💎 SAP Geliştirmeleri</button>
-                <button class="nav-item" data-section="other">🔧 Diğer Geliştirmeler</button>
-                <button class="nav-item" data-section="bulletins">📰 Bültenler</button>
-                <button class="nav-item" data-section="roadmap">🗺️ Roadmap</button>
-                <button class="nav-item" data-section="training">📚 Eğitim İçerikleri</button>
+                <button class="nav-item active" data-section="metrics">Metrikler</button>
+                <button class="nav-item" data-section="agents">Agentlar</button>
+                <button class="nav-item" data-section="sap">SAP Geliştirmeleri</button>
+                <button class="nav-item" data-section="other">Diğer Geliştirmeler</button>
+                <button class="nav-item" data-section="bulletins">Bültenler</button>
+                <button class="nav-item" data-section="roadmap">Roadmap</button>
+                <button class="nav-item" data-section="training">Eğitim İçerikleri</button>
             </nav>
             <div class="sidebar-footer">
-                <button class="btn-export" id="btnPublish">📥 Yayınla (data.js indir)</button>
-                <button class="btn-reset" id="btnResetAll">🔄 Tümünü Sıfırla</button>
+                <button class="btn-export" id="btnPublish">Yayımla</button>
+                <button class="btn-reset" id="btnResetAll">Tümünü Sıfırla</button>
                 <a href="index.html" class="btn-back">← Siteye Dön</a>
             </div>
         </aside>
