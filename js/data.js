@@ -1,6 +1,6 @@
 /* ============================================
    DATA.JS - Merkezi Veri Yönetimi
-   Otomatik oluşturuldu: 28.02.2026 18:23:58
+   Otomatik oluşturuldu: 02.03.2026 09:19:15
    ============================================ */
 
 const DataStore = (function () {
@@ -10,7 +10,7 @@ const DataStore = (function () {
   const DEFAULTS = {
   "metrics": [
     {
-      "value": 25,
+      "value": 24,
       "prefix": "%",
       "suffix": "",
       "label": "VERİMLİLİK ARTIŞI",
